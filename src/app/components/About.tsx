@@ -49,7 +49,7 @@ export function About() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-white mb-2">Experience</h3>
-                  <p className="text-[#94A3B8]">Internship at BD Calling Academy</p>
+                  <p className="text-[#94A3B8]">Industrial attachment at BD Calling Academy</p>
                 </div>
               </div>
             </div>
@@ -61,7 +61,7 @@ export function About() {
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-white mb-2">Interests</h3>
-                  <p className="text-[#94A3B8]">Backend Architecture, System Design, Programming & Psychology Books</p>
+                  <p className="text-[#94A3B8]">Backend Architecture, System Design & Security, Programming, Ai technologies, Psychology Books & Chess </p>
                 </div>
               </div>
             </div>
