@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { ExternalLink, Github } from 'lucide-react';
 // import { ProjectModal } from './ProjectModal';
-import clinicLogo from '../../asset/clinic-z-logo.png'; // adjust path if needed
+import clinicLogo from '../../asset/clinic-z-logo.png';
+import genuLogo from '../../asset/genu-library.png';
+import recipeLogo from '../../asset/recipe-logo.png';
 
 export interface Project {
   id: string;
@@ -10,7 +12,7 @@ export interface Project {
   stack: string[];
   highlights: string[];
   githubUrl: string;
-  demoUrl?: string;
+  LiveUrl?: string;
   overview: string;
   architecture: {
     erd: string;
@@ -25,6 +27,7 @@ export interface Project {
   }>;
   features: string[];
   testing: string;
+  logo?: string; // optional logo field (imported image)
 }
 
 export function Projects() {
@@ -34,8 +37,7 @@ export function Projects() {
     {
       id: 'clinic-z',
       title: 'Clinic-Z - Smart Hospital Management System',
-      description:
-        'Clinic-z a smart hospital management backend system with DRF',
+      description: 'Clinic-z a smart hospital management backend system with DRF',
       stack: ['Django', 'Django REST Framework', 'PostgreSQL', 'Docker'],
       highlights: [
         'JWT + OTP authentication flows (register, activate, login, token refresh)',
@@ -47,7 +49,7 @@ export function Projects() {
         'Containerized deployment (Docker Compose → K8s path)'
       ],
       githubUrl: 'https://github.com/SheikhIshere/CliniZ-api-drf/tree/main',
-      demoUrl: 'https://cliniz-api-drf.onrender.com',
+      LiveUrl: 'https://cliniz-api-drf.onrender.com',
       overview:
         'API-first backend for hospital workflows: user auth (OTP + JWT), patient & doctor profiles, availability management, appointment lifecycle, reviews, public portal, and background tasks for emails/media processing.',
       architecture: {
@@ -123,26 +125,44 @@ export function Projects() {
         'OpenAPI + Swagger for API exploration'
       ],
       testing:
-        'Unit tests for auth, booking, and appointment workflows; integration tests for public endpoints and background tasks. CI runs test suite on PRs; aim for high coverage and regression protection.'
+        'Unit tests for auth, booking, and appointment workflows; integration tests for public endpoints and background tasks. CI runs test suite on PRs; aim for high coverage and regression protection.',
+      logo: clinicLogo
     },
     {
       id: 'library',
-      title: 'Library Management System',
-      description: 'A comprehensive library management system with book tracking, user management, and borrowing system.',
-      stack: ['Django', 'DRF', 'PostgreSQL', 'Redis', 'Celery'],
+      title: 'Genu Library - Digital Library Platform',
+      description: 'Modern, feature-rich digital library platform built with Django & Tailwind CSS for managing, sharing, and discovering books.',
+      stack: ['Django', 'Python', 'Tailwind CSS', 'SQLite/PostgreSQL'],
       highlights: [
-        'RESTful API with JWT authentication',
-        'Real-time book availability tracking',
-        'Automated overdue notifications',
-        'Advanced search with filters'
+        'Book upload & automatic cover generation',
+        'Smart multi-field search (title, author, tags, uploader)',
+        'User profiles with avatars and social links',
+        'Ratings, favorites, playlists, comments & reviews',
+        'Responsive design with dark/light theme',
+        'Real-time search suggestions with AJAX',
+        'Admin tools: bulk uploads, tag management, featured books'
       ],
-      githubUrl: '<github-repo-url>',
-      demoUrl: '<live-demo-url>',
+      githubUrl: 'https://github.com/SheikhIshere/Library',
+      LiveUrl: 'https://genu-library-by-imran.onrender.com/',
       overview:
-        'A full-featured library management system designed to handle book inventory, member management, and borrowing workflows. Built with scalability and performance in mind.',
+        'A full web app for digital library management: upload PDFs, manage users, rate/review books, create playlists, and engage with the community. Built with scalability, performance, and interactive UI in mind.',
       architecture: {
-        erd: `User (id, email, name, role)\n  |\n  | 1:N\n  |\nBorrow (id, user_id, book_id, due_date, status)\n  |\n  | N:1\n  |\nBook (id, title, author, isbn, quantity, available)`,
-        deployment: `User Request → Nginx → Gunicorn → Django App\n                                      |\n                                      ├→ PostgreSQL\n                                      ├→ Redis Cache\n                                      └→ Celery Workers`
+        erd: `User (id, username, email)
+  | 1:1
+Profile (avatar, balance, social_link)
+  |
+Book (id, title, author, uploader, price, visibility, tags, slug, upload_date, cover)
+  | 1:N
+BookRating (user, book, rating)
+BookFavorite (user, book)
+Comment (user, book, content)
+Playlist (user, books)
+Report (user, book, reason)`,
+        deployment: `User → Nginx → Gunicorn → Django
+  ├→ SQLite/PostgreSQL
+  ├→ Redis (optional caching)
+  ├→ Celery (email notifications, bulk tasks)
+  └→ Static/Media handling (local or S3/R2)`
       },
       apiExamples: [
         {
@@ -154,8 +174,8 @@ export function Projects() {
   "password": "********"
 }`,
           response: `{
-  "access": "eyJ0eXAiOiJKV1QiLCJhbGc...",
-  "refresh": "eyJ0eXAiOiJKV1QiLCJhbGc...",
+  "access": "<jwt-access-token>",
+  "refresh": "<jwt-refresh-token>",
   "user": {
     "id": 1,
     "email": "user@example.com",
@@ -183,78 +203,115 @@ export function Projects() {
         }
       ],
       features: [
-        'JWT-based authentication system',
-        'Book CRUD operations with image upload',
-        'Borrowing system with due date tracking',
-        'Automated email notifications via Celery',
-        'Advanced search with pagination',
-        'Admin dashboard for librarians'
+        'PDF book upload & automatic cover generation',
+        'Multi-field search by title, author, tags, uploader',
+        'User profiles with avatar, balance, social links',
+        'Rating, favorites, playlists, comments & reviews',
+        'Admin tools for bulk upload, tags, featured books',
+        'Responsive dark/light UI built with Tailwind',
+        'Real-time AJAX search suggestions'
       ],
-      testing: 'Unit tests with pytest, 85% code coverage. Integration tests for API endpoints. CI/CD pipeline with GitHub Actions.'
+      testing:
+        'Unit tests for auth, book CRUD, ratings, favorites, playlists; integration tests for search, comments, and admin features. CI/CD pipelines recommended.',
+      logo: genuLogo
     },
     {
-      id: 'hireme',
-      title: 'HireMe - Job Platform',
-      description: 'Job listing platform connecting employers with candidates, featuring application tracking and messaging.',
-      stack: ['Django', 'DRF', 'PostgreSQL', 'Docker', 'WebSockets'],
+      id: 'recipe-api',
+      title: 'Recipe API 🍳',
+      description: 'A robust, well-tested RESTful API for managing recipes with full CRUD operations, authentication, and image uploads.',
+      stack: ['Django', 'DRF', 'Docker', 'PostgreSQL'],
       highlights: [
-        'Real-time messaging system',
-        'Application status tracking',
-        'Resume parsing and matching',
-        'Email notifications'
+        'Token-based auth with custom email user model',
+        'Full CRUD for recipes with image uploads & filtering',
+        'Tag & ingredient management system',
+        'Interactive Swagger/OpenAPI docs',
+        'Production-ready Docker setup',
+        '1000+ lines of comprehensive tests'
       ],
-      githubUrl: '<github-repo-url>',
+      githubUrl: 'https://github.com/SheikhIshere/django-recipe-api',
       demoUrl: '<live-demo-url>',
       overview:
-        'A modern job platform that streamlines the hiring process with real-time communication, automated resume parsing, and intelligent job matching.',
+        'A full-featured RESTful API for recipe management: secure authentication, recipe CRUD with images, tag & ingredient management, filtering, and comprehensive testing.',
       architecture: {
-        erd: `Employer (id, company, email)\n  |\n  | 1:N\n  |\nJob (id, title, description, requirements)\n  |\n  | N:N\n  |\nApplication (id, candidate_id, job_id, status)\n  |\n  | N:1\n  |\nCandidate (id, name, email, resume)`,
-        deployment: `User → Load Balancer → Django Apps\n                         |\n                         ├→ PostgreSQL\n                         ├→ Redis (WebSocket)\n                         └→ S3 (Resumes)`
+        erd: `User (id, email, name)
+      | 1:1
+    Profile (optional avatar, balance, social links)
+      |
+    Recipe (id, title, time_minutes, price, tags, ingredients, image)
+    Tag (id, name)
+    Ingredient (id, name)
+    RecipeTag (recipe_id, tag_id)
+    RecipeIngredient (recipe_id, ingredient_id)`,
+        deployment: `User → Nginx → Gunicorn → Django
+      ├→ PostgreSQL
+      ├→ Redis (optional caching)
+      ├→ Celery (email notifications, background tasks)
+      └→ Media/Static handling (local or S3/R2)
+    (Docker Compose for dev; production-ready containerization)`
       },
       apiExamples: [
         {
           method: 'POST',
-          endpoint: '/api/jobs/',
-          description: 'Create job listing',
+          endpoint: '/api/users/',
+          description: 'User registration',
           request: `{
-  "title": "Backend Developer",
-  "description": "We are looking for...",
-  "requirements": ["Python", "Django"],
-  "salary_range": "$80k-$120k"
-}`,
+      "email": "user@example.com",
+      "password": "Pass1234"
+    }`,
           response: `{
-  "id": 42,
-  "title": "Backend Developer",
-  "status": "active",
-  "created_at": "2024-12-21T10:30:00Z"
-}`
+      "id": 1,
+      "email": "user@example.com",
+      "status": "pending_activation"
+    }`
         },
         {
           method: 'POST',
-          endpoint: '/api/applications/',
-          description: 'Submit job application',
+          endpoint: '/api/users/token/',
+          description: 'Obtain auth token',
           request: `{
-  "job_id": 42,
-  "cover_letter": "I am excited to apply...",
-  "resume": "base64_encoded_file"
-}`,
+      "email": "user@example.com",
+      "password": "Pass1234"
+    }`,
           response: `{
-  "id": 123,
-  "status": "pending",
-  "submitted_at": "2024-12-21T11:00:00Z"
-}`
+      "access": "<jwt-access-token>",
+      "refresh": "<jwt-refresh-token>"
+    }`
+        },
+        {
+          method: 'POST',
+          endpoint: '/api/recipes/',
+          description: 'Create a recipe',
+          request: `{
+      "title": "Pasta Carbonara",
+      "time_minutes": 30,
+      "price": 12.50,
+      "tags": [1, 2],
+      "ingredients": [1, 3, 5]
+    }`,
+          response: `{
+      "id": 101,
+      "title": "Pasta Carbonara",
+      "time_minutes": 30,
+      "price": 12.50,
+      "tags": [...],
+      "ingredients": [...],
+      "image": "pasta.png"
+    }`
         }
       ],
       features: [
-        'Real-time chat using Django Channels',
-        'Resume parsing with NLP',
-        'Job matching algorithm',
-        'Application status workflow',
-        'Email and in-app notifications',
-        'Admin panel for moderation'
+        'Token-based authentication with custom email user model',
+        'Recipe CRUD with image uploads and filtering',
+        'Tag & ingredient management',
+        'Interactive Swagger/OpenAPI documentation',
+        'Production-ready Docker containerization',
+        'Extensive automated tests'
       ],
-      testing: 'TDD approach with 80%+ coverage. WebSocket testing with pytest-asyncio.'
+      testing:
+        '1000+ lines of unit and integration tests: model, API endpoints, authentication, serializer validation, image uploads, filter/search functionality.',
+      logo: recipeLogo
     }
+
   ];
 
   return (
@@ -276,12 +333,8 @@ export function Projects() {
               >
                 {/* Project Image */}
                 <div className="h-48 bg-[#0EA5A4]/5 flex items-center justify-center">
-                  {project.id === 'clinic-z' ? (
-                    <img
-                      src={clinicLogo}
-                      alt="Clinic-Z Logo"
-                      className="h-full object-contain p-4"
-                    />
+                  {project.logo ? (
+                    <img src={project.logo} alt={`${project.title} Logo`} className="h-full w-auto object-contain p-4" />
                   ) : (
                     <div className="text-6xl text-[#0EA5A4]/30 group-hover:text-[#0EA5A4]/50 transition-colors">
                       {'</>'}
@@ -299,10 +352,7 @@ export function Projects() {
                   {/* Tech Stack */}
                   <div className="flex flex-wrap gap-2 mb-4">
                     {project.stack.map((tech, idx) => (
-                      <span
-                        key={idx}
-                        className="px-3 py-1 bg-[#0EA5A4]/10 text-[#0EA5A4] rounded-full text-sm"
-                      >
+                      <span key={idx} className="px-3 py-1 bg-[#0EA5A4]/10 text-[#0EA5A4] rounded-full text-sm">
                         {tech}
                       </span>
                     ))}
@@ -330,16 +380,16 @@ export function Projects() {
                       <Github className="w-4 h-4" />
                       <span className="text-sm">GitHub</span>
                     </a>
-                    {project.demoUrl && (
+                    {project.LiveUrl && (
                       <a
-                        href={project.demoUrl}
+                        href={project.LiveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-[#94A3B8] hover:text-[#0EA5A4] transition-colors"
                         onClick={(e) => e.stopPropagation()}
                       >
                         <ExternalLink className="w-4 h-4" />
-                        <span className="text-sm">Demo</span>
+                        <span className="text-sm">Live</span>
                       </a>
                     )}
                   </div>
@@ -349,7 +399,6 @@ export function Projects() {
           </div>
         </div>
       </section>
-
     </>
   );
 }
