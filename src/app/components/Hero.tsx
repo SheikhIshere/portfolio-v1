@@ -150,9 +150,17 @@ export function Hero() {
               >
                 View Projects
               </button>
-              <button className="px-6 py-3 border border-[#94A3B8] text-[#94A3B8] rounded-lg hover:bg-white/5 transition-colors">
-                Download Resume
-              </button>
+              <a
+                href="https://drive.google.com/uc?export=download&id=1itIk-wV2G2Fp2f8SUZ2Ou3eCac4fG7Nt"
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+              >
+                <button className="px-6 py-3 border border-[#94A3B8] text-[#94A3B8] rounded-lg hover:bg-white/5 transition-colors">
+                  Download Resume
+                </button>
+              </a>
+
             </div>
 
             {/* Social Links */}
