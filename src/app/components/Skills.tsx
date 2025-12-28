@@ -10,7 +10,8 @@ export function Skills() {
         { name: 'Python', level: 90 },
         { name: 'Django', level: 85 },
         { name: 'Django REST Framework', level: 85 },
-        { name: 'FastAPI', level: 50 },
+        { name: 'C++', level: 85 },
+        // { name: 'FastAPI', level: 50 },
       ],
     },
     {
@@ -18,8 +19,9 @@ export function Skills() {
       title: 'Databases',
       skills: [
         { name: 'PostgreSQL', level: 85 },
-        { name: 'Redis', level: 35 },
-        { name: 'MySql', level: 65 },
+        { name: 'Redis', level: 25 },
+        { name: 'MySql', level: 25 },
+        { name: 'SQLite', level: 85 },
       ],
     },
     {
@@ -37,9 +39,10 @@ export function Skills() {
       title: 'Backend Technologies',
       skills: [
         { name: 'RESTful APIs', level: 90 },
-        { name: 'Celery', level: 75 },
-        { name: 'RabbitMQ', level: 30 },
+        { name: 'Celery', level: 25 },
+        // { name: 'RabbitMQ', level: 30 },
         { name: 'JWT Auth', level: 85 },
+        { name: 'Cloudflare Storage', level: 25 },
       ],
     },
     {
@@ -49,16 +52,18 @@ export function Skills() {
         { name: 'System Design', level: 80 },
         { name: 'Database Design (ERD)', level: 85 },
         { name: 'API Design', level: 85 },
-        { name: 'Caching Strategies', level: 25 },
+        // { name: 'Caching Strategies', level: 25 },
+        { name: 'Design Patterns', level: 25 },
       ],
     },
     {
       icon: GitBranch,
       title: 'Other',
       skills: [
-        { name: 'Async Tasks', level: 30 },
+        // { name: 'Async Tasks', level: 30 },
         { name: 'Testing', level: 75 },
         { name: 'Documentation', level: 85 },
+        { name: 'Api Integration', level: 35 },
       ],
     },
   ];

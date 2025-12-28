@@ -11,7 +11,7 @@ export function Hero() {
     if (element) element.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const techStack = ['Python', 'Django', 'DRF', 'PostgreSQL', 'Docker', 'CI/CD', 'Redis', 'Celery'];
+  const techStack = ['Python', 'Django', 'DRF', 'PostgreSQL', 'Docker', 'CI/CD',];// 'Redis', 'Celery'];
 
   // Refs for 3D interaction
   const ira3dRootRef = useRef<HTMLDivElement | null>(null);
