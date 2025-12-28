@@ -53,10 +53,18 @@ export function Navbar() {
             >
               Hire Me
             </button>
-            <button className="px-4 py-2 border border-[#0EA5A4] text-[#0EA5A4] rounded-lg hover:bg-[#0EA5A4]/10 transition-colors flex items-center gap-2">
-              <Download className="w-4 h-4" />
-              Resume
-            </button>
+              <a
+                href="https://drive.google.com/uc?export=download&id=1itIk-wV2G2Fp2f8SUZ2Ou3eCac4fG7Nt"
+                target="_blank"
+                rel="noopener noreferrer"
+                download
+              >
+                <button className="px-4 py-2 border border-[#0EA5A4] text-[#0EA5A4] rounded-lg hover:bg-[#0EA5A4]/10 transition-colors flex items-center gap-2">
+                  <Download className="w-4 h-4" />
+                  Resume
+                </button>
+              </a>
+
           </div>
 
           {/* Mobile menu button */}
